@@ -28,11 +28,18 @@ function Detail() {
         _id: id,
         purchaseQuantity: parseInt(itemInCart.purchaseQuantity) +1
       });
+      //existing item data to increment
+      idbPromise('cart', 'put', {
+        ...itemInCart,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1
+      });
     } else {
       dispatch({
         type: ADD_TO_CART,
         product: { ...currentProduct, purchaseQuantity: 1 }
       });
+      //product not in cart?
+      idbPromise('cart', 'put', {...currentProduct, purchaseQuantity: 1});
     }
   };
 const removeFromCart = () => {
@@ -40,6 +47,8 @@ const removeFromCart = () => {
     type: REMOVE_FROM_CART,
     _id: currentProduct._id
   });
+  //upon removal
+  idbPromise('cart', 'delete', {...currentProduct});
 };
 
   useEffect(() => {
