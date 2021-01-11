@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from '@apollo/react-hooks';
-
+import { useSelector } from 'react-redux';
 import ProductItem from "../ProductItem";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
@@ -8,6 +8,8 @@ import { QUERY_PRODUCTS } from "../../utils/queries";
 import spinner from "../../assets/spinner.gif";
 import { idbPromise } from "../../utils/helpers";
 
+//for redux?
+// const selectProducts = state => state.products
 
 function ProductList() {
   const [state, dispatch] = useStoreContext();
